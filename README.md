@@ -1,37 +1,37 @@
-# Ethara AI 
+# Ethara AI
 
 A full-stack team task management application where Project Leads create projects, assign tasks to team members, track progress, and view analytics — built with Next.js, Express, and SQLite.
 
-
-
 ## Live Demo
 
-- **Frontend (Vercel):** 
-- **Backend (Render):** 
+- **Frontend (Vercel):** https://ethara-ai-nine.vercel.app/
+- **Backend (Render):** https://ethara-ai-rak5.onrender.com
 - **GitHub:** https://github.com/SanskritiAnand/Ethara-AI
-
-
 
 ## Features
 
 ### User Authentication
+
 - Signup with Name, Email, Password, and Role
 - Secure login with JWT (stored in localStorage)
 - Protected routes redirect unauthenticated users to login
 - Role embedded in JWT — no extra DB call needed for permission checks
 
 ### Project Management
+
 - Project Leads can create projects (creator becomes admin automatically)
 - Admin can add and remove members from projects
 - Members only see projects they've been added to
 
 ### Task Management
+
 - Create tasks with Title, Description, Due Date, Priority, and Assignee
 - Update task status: Queued → To Do → In Progress → In Review → Done → Approved
 - Overdue tasks highlighted in red (due date passed and not done)
 - Delete tasks (Project Lead only)
 
 ### Dashboard
+
 - Total task count
 - Overdue task count
 - Tasks grouped by status (via SQL GROUP BY)
@@ -39,29 +39,26 @@ A full-stack team task management application where Project Leads create project
 - 5 most recently updated tasks
 
 ### Role-Based Access
-| Feature | Project Lead | Member |
-|---|---|---|
-| Create projects | ✅ | ❌ |
-| Add/remove members | ✅ | ❌ |
-| Create tasks | ✅ | ❌ |
-| Update any task status | ✅ | ❌ |
-| Update assigned task status | ✅ | ✅ |
-| View all tasks | ✅ | assigned only |
-| View dashboard | ✅ | ✅ (own data) |
 
-
+| Feature                     | Project Lead | Member        |
+| --------------------------- | ------------ | ------------- |
+| Create projects             | ✅           | ❌            |
+| Add/remove members          | ✅           | ❌            |
+| Create tasks                | ✅           | ❌            |
+| Update any task status      | ✅           | ❌            |
+| Update assigned task status | ✅           | ✅            |
+| View all tasks              | ✅           | assigned only |
+| View dashboard              | ✅           | ✅ (own data) |
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Frontend | Next.js 14 (App Router), TypeScript |
-| Backend | Node.js, Express |
-| Database | SQLite via sql.js (persisted to disk) |
-| Auth | JWT (jsonwebtoken), bcryptjs |
-| Deployment | Railway (backend), Vercel (frontend) |
-
-
+| Layer      | Technology                            |
+| ---------- | ------------------------------------- |
+| Frontend   | Next.js 14 (App Router), TypeScript   |
+| Backend    | Node.js, Express                      |
+| Database   | SQLite via sql.js (persisted to disk) |
+| Auth       | JWT (jsonwebtoken), bcryptjs          |
+| Deployment | Railway (backend), Vercel (frontend)  |
 
 ## Project Structure
 
@@ -96,11 +93,10 @@ team-task-manager/
             └── users.js
 ```
 
-
-
 ## Local Setup
 
 ### Prerequisites
+
 - Node.js 18+
 - npm or yarn
 
@@ -155,46 +151,47 @@ npm run dev
 
 Frontend runs at `http://localhost:3000`
 
-
-
 ## API Endpoints
 
 ### Auth
-| Method | Route | Description |
-|---|---|---|
-| POST | `/api/auth/signup` | Register new user |
-| POST | `/api/auth/login` | Login, returns JWT |
-| GET | `/api/auth/me` | Get current user |
+
+| Method | Route              | Description        |
+| ------ | ------------------ | ------------------ |
+| POST   | `/api/auth/signup` | Register new user  |
+| POST   | `/api/auth/login`  | Login, returns JWT |
+| GET    | `/api/auth/me`     | Get current user   |
 
 ### Projects
-| Method | Route | Description | Role |
-|---|---|---|---|
-| GET | `/api/projects` | List user's projects | All |
-| POST | `/api/projects` | Create project | Lead |
-| GET | `/api/projects/:id` | Get project + members | All |
-| POST | `/api/projects/:id/members` | Add member | Lead |
-| DELETE | `/api/projects/:id/members/:userId` | Remove member | Lead |
-| DELETE | `/api/projects/:id` | Delete project | Lead |
+
+| Method | Route                               | Description           | Role |
+| ------ | ----------------------------------- | --------------------- | ---- |
+| GET    | `/api/projects`                     | List user's projects  | All  |
+| POST   | `/api/projects`                     | Create project        | Lead |
+| GET    | `/api/projects/:id`                 | Get project + members | All  |
+| POST   | `/api/projects/:id/members`         | Add member            | Lead |
+| DELETE | `/api/projects/:id/members/:userId` | Remove member         | Lead |
+| DELETE | `/api/projects/:id`                 | Delete project        | Lead |
 
 ### Tasks
-| Method | Route | Description | Role |
-|---|---|---|---|
-| GET | `/api/tasks` | Get all tasks (filtered by role) | All |
-| POST | `/api/tasks` | Create task | Lead |
-| PATCH | `/api/tasks/:id` | Update task | Lead / Assignee |
-| DELETE | `/api/tasks/:id` | Delete task | Lead |
+
+| Method | Route            | Description                      | Role            |
+| ------ | ---------------- | -------------------------------- | --------------- |
+| GET    | `/api/tasks`     | Get all tasks (filtered by role) | All             |
+| POST   | `/api/tasks`     | Create task                      | Lead            |
+| PATCH  | `/api/tasks/:id` | Update task                      | Lead / Assignee |
+| DELETE | `/api/tasks/:id` | Delete task                      | Lead            |
 
 ### Dashboard
-| Method | Route | Description |
-|---|---|---|
-| GET | `/api/dashboard` | Aggregated stats |
+
+| Method | Route            | Description      |
+| ------ | ---------------- | ---------------- |
+| GET    | `/api/dashboard` | Aggregated stats |
 
 ### Users
-| Method | Route | Description |
-|---|---|---|
-| GET | `/api/users` | List all users (for dropdowns) |
 
-
+| Method | Route        | Description                    |
+| ------ | ------------ | ------------------------------ |
+| GET    | `/api/users` | List all users (for dropdowns) |
 
 ## Database Schema
 
@@ -242,18 +239,15 @@ CREATE TABLE tasks (
 );
 ```
 
-
-
 ## Demo Video
 
 [Watch the demo here](https://your-video-link)
 
 Features covered:
+
 - User signup and JWT authentication
 - Project creation and member management
 - Task creation, assignment, and status updates
 - Dashboard analytics
 - Role-based access control
 - Live deployment on Render + Vercel
-
-
